@@ -113,7 +113,7 @@ Puppet::Type.type(:pagefile).provide(:wmi) do
 
       validate_props
 
-      pagefile = adsi.wmi_connection.InstancesOf('Win32_PageFileSetting').to_enum.find { |f| f.Name == resource[:path] }
+      pagefile = adsi.wmi_connection.InstancesOf('Win32_PageFileSetting').to_enum.find { |f| f.Name.downcase == resource[:path].downcase }
 
       if @property_flush[:initialsize] or @property_flush[:maximumsize] or @property_flush[:systemmanaged]
         pagefile.InitialSize = @property_flush[:initialsize]

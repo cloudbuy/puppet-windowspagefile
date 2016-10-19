@@ -9,14 +9,6 @@ Puppet::Type.newtype(:pagefile) do
     validate do |value|
       fail("Invalid page file name. Must be an absolute path, got #{value}") unless Pathname.new(value).absolute?
     end
-
-    munge do |value|
-      if Facter.value(:operatingsystemrelease) =~ /2012/
-        value.downcase
-      else
-        value.capitalize
-      end
-    end
   end
 
   newproperty(:systemmanaged, :boolean => true, :parent => Puppet::Property::Boolean) do
