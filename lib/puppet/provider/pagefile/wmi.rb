@@ -39,7 +39,7 @@ Puppet::Type.type(:pagefile).provide(:wmi) do
         system_managed = false
       end
       new(
-        :name          => pagefile.Name,
+        :name          => pagefile.Name.downcase,
         :ensure        => :present,
         :initialsize   => pagefile.InitialSize,
         :maximumsize   => pagefile.MaximumSize,
