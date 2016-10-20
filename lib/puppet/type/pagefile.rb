@@ -9,6 +9,9 @@ Puppet::Type.newtype(:pagefile) do
     validate do |value|
       fail("Invalid page file name. Must be an absolute path, got #{value}") unless Pathname.new(value).absolute?
     end
+    munge do |value|
+      value.downcase
+    end
   end
 
   newproperty(:systemmanaged, :boolean => true, :parent => Puppet::Property::Boolean) do
